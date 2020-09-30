@@ -23,8 +23,25 @@ public class Vendeur extends Client{
     public Vendeur(int id, String titre, String nom, String prenom, String rue, String copos, String ville, String mail, Pays unPays) {
         super(id, titre, nom, prenom, rue, copos, ville, mail, unPays);
     }
+
+    public ArrayList<Cheval> getLesChevaux() {
+        return lesChevaux;
+    }
+
+    public void setLesChevaux(ArrayList<Cheval> lesChevaux) {
+        this.lesChevaux = lesChevaux;
+    }
     
     
+     public void addUnCheval(Cheval unCheval){
+        if (lesChevaux == null){
+            lesChevaux = new ArrayList<Cheval>();
+        }
+        lesChevaux.add(unCheval);
+    }
     
+    public int getNbCheval(){
+        return lesChevaux.size();
+    }
     
 }

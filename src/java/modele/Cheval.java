@@ -22,6 +22,7 @@ public class Cheval {
     private Vendeur unVendeur;
     private ArrayList<Lot> lesLots;
     private ArrayList<Prix> lesPrix;
+    
 
     public Cheval() {
     }

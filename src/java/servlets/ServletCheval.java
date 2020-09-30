@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modele.Cheval;
+import formulaires.ChevalForm;
 
 /**
  *
@@ -91,6 +92,13 @@ public class ServletCheval extends HttpServlet {
             request.setAttribute("punCheval", unCheval);
             getServletContext().getRequestDispatcher("/vues/cheval/infoCheval.jsp").forward(request, response);
         }
+                    
+       
+       if(url.equals("/EquidaWeb20/ServletAdmin/ajouterCategVente"))
+        {     
+          this.getServletContext().getRequestDispatcher("/vues/categVente/categVenteAjouter.jsp" ).forward( request, response );
+        }
+    
     }
 
     /**
@@ -104,14 +112,40 @@ public class ServletCheval extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ChevalForm form = new ChevalForm();
+		
+        /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
+        Cheval unCheval = form.ajouterCheval(request);
+        
+        /* Stockage du formulaire et de l'objet dans l'objet request */
+        request.setAttribute( "form", form );
+        request.setAttribute( "pCheval", unCheval );
+		
+        if (form.getErreurs().isEmpty()){
+            // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
+            ChevalDAO.ajouterCheval(connection, unCheval);
+            this.getServletContext().getRequestDispatcher("/vues/client/clientConsulter.jsp" ).forward( request, response );
+        }
+        else
+        { 
+		// il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
+            
+           this.getServletContext().getRequestDispatcher("/vues/client/clientAjouter.jsp" ).forward( request, response );
+        }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @Override
     public String getServletInfo() {
         return "Short description";

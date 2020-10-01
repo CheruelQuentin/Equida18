@@ -46,15 +46,7 @@
                 <label for="codeTypeCheval">Type cheval : </label>
                 <input list="listeTypeCheval" name="codeTypeCheval" id="codeTypeCheval">
                
-                <datalist id="codePays">
-                    <%
-                        ArrayList<TypeCheval> lesPays = (ArrayList)request.getAttribute("pLesPays");
-                        for (int i=0; i<lesPays.size();i++){
-                            TypeCheval p = lesPays.get(i);
-                            out.println("<option value='" + p.getId()+"'>" + p.getLibelle()+"</option>" );
-                        }
-                    %>
-                </datalist>
+            
                 
                 
             <input type="submit" name="valider" id="valider" value="Valider"/>
